@@ -4,16 +4,37 @@
 #include<iostream>
 #include<string>
 
+struct DATA
+{
+	std::string Str;
+	int Weight;//权重
+};
+
 typedef struct HFMTNode* HFMT;
 struct HFMTNode
 {
-	std::string Data;
-	int Weight;//权重
+	DATA Data;
 	HFMT Left;
 	HFMT Right;
 }; 
 
-HFMT CreateHT();
-HFMT Insert(HFMT H, )
+typedef struct HNode* MinHeap;
+struct HNode
+{
+	DATA Data;
+	MinHeap Left;
+	MinHeap Right;
+};
+
+//
+MinHeap MinHeap_New();
+MinHeap MinHeap_Insert(DATA D, MinHeap MH);
+MinHeap MinHeap_WriteIn(DATA* D);
+HFMT MinHeap_Pop(MinHeap MH);
+//
+HFMT CreateHT(MinHeap MH);
+//HFMT 
+//HFMT HaffmanTree_Insert(HFMT HT, DATA D);
+
 
 #endif // !_HEAH_H_
