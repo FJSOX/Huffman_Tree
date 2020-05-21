@@ -21,15 +21,15 @@ struct HFMTNode
 typedef struct HNode* MinHeap;
 struct HNode
 {
-	DATA Data;
+	HFMT Data;
 	MinHeap Left;
 	MinHeap Right;
 };
 
 //
 MinHeap MinHeap_New();
-MinHeap MinHeap_Insert(DATA D, MinHeap MH);
-MinHeap MinHeap_WriteIn(DATA* D);
+MinHeap MinHeap_Insert(HFMT D, MinHeap MH);
+MinHeap MinHeap_WriteIn(HFMT* D);
 HFMT MinHeap_Pop(MinHeap MH);
 //
 HFMT CreateHT(MinHeap MH);
