@@ -56,7 +56,7 @@ MinHeap InsertMinHeap(MinHeap H, DA D)//D为DATA*类型的数据
 void Pr_Heap(MinHeap H)
 {
 	for (int i = 1; i <= H->Size; i++) {
-		std::cout << H->Data[i] << "\t";
+		std::cout << H->Data[i]->Data->Str << "\t";
 	}
 }
 
@@ -105,7 +105,7 @@ HFMT DeleteMinHeap(MinHeap H)
 	return ret;
 }
 
-MinHeap WriteToMaxHeap(int Maxlayer, DA a[], int lentha)
+MinHeap WriteToMinHeap(int Maxlayer, DA a[], int lentha)
 {
 	MinHeap h = CreateHeap(Maxlayer);
 	int i = 0;
