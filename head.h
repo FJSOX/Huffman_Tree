@@ -35,12 +35,12 @@ MinHeap InsertMinHeap(MinHeap H, DA D);//不能用零作为数据
 void Pr_Heap(MinHeap H);
 HFMT Maxab(HFMT a, HFMT b);
 HFMT DeleteMinHeap(MinHeap H);
-MinHeap WriteToMinHeap(int Maxlayer, int a[], int lentha);//lentha为数组a[]的长度
+MinHeap WriteToMinHeap(int Maxlayer, DA a[], int lentha);//lentha为数组a[]的长度
 
 MinHeap MinHeap_New();
 MinHeap MinHeap_Insert(HFMT D, MinHeap MH);
 MinHeap MinHeap_WriteIn(HFMT* D);
-HFMT MinHeap_Pop(MinHeap MH);
+//HFMT MinHeap_Pop(MinHeap MH);
 
 //
 HFMT CreateHT(MinHeap MH);
