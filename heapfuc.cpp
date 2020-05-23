@@ -9,7 +9,8 @@ MinHeap CreateHeap(int Maxlayer)
 	h->Data = new HFMT[Maxsize]();
 	h->Capacity = Maxsize - 1;
 	h->Size = 0;
-	h->Data[0]->Data.Str = "500";//哨兵，意义？
+	h->Data[0]->Data.Weight = 1;
+	//h->Data[0]->Data.Str = 500;//哨兵，意义？
 
 	return h;
 }
