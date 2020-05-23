@@ -4,7 +4,7 @@
 #include<iostream>
 #include<string>
 
-typedef struct DATA* DA;
+//typedef struct DATA* DA;
 struct DATA
 {
 	std::string Str;
@@ -14,7 +14,7 @@ struct DATA
 typedef struct HFMTNode* HFMT;
 struct HFMTNode
 {
-	DA Data;
+	DATA Data;
 	HFMT Left;
 	HFMT Right;
 }; 
@@ -31,11 +31,11 @@ struct HNode
 MinHeap CreateHeap(int Maxlayer);//Maxlayer为最大层数
 bool IsFullHeap(MinHeap H);
 bool IsEmptyHeap(MinHeap H);
-MinHeap InsertMinHeap(MinHeap H, DA D);//不能用零作为数据
+MinHeap InsertMinHeap(MinHeap H, DATA D);//不能用零作为数据
 void Pr_Heap(MinHeap H);
 HFMT Maxab(HFMT a, HFMT b);
 HFMT DeleteMinHeap(MinHeap H);
-MinHeap WriteToMinHeap(int Maxlayer, DA a[], int lentha);//lentha为数组a[]的长度
+MinHeap WriteToMinHeap(int Maxlayer, DATA a[], int lentha);//lentha为数组a[]的长度
 
 MinHeap MinHeap_New();
 MinHeap MinHeap_Insert(HFMT D, MinHeap MH);
