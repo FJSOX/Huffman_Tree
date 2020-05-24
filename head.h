@@ -11,18 +11,18 @@ struct DATA
 	int Weight;//权重
 };
 
-typedef struct HFMTNode* HFMT;
+//typedef struct HFMTNode* HFMT;
 struct HFMTNode
 {
 	DATA Data;
-	HFMT Left;
-	HFMT Right;
+	HFMTNode* Left;
+	HFMTNode* Right;
 }; 
 
 typedef struct HNode* MinHeap;
 struct HNode
 {
-	HFMT* Data;
+	HFMTNode* Data;
 	int Size;
 	int Capacity;
 };
@@ -33,19 +33,19 @@ bool IsFullHeap(MinHeap H);
 bool IsEmptyHeap(MinHeap H);
 MinHeap InsertMinHeap(MinHeap H, DATA D);//不能用零作为数据
 void Pr_Heap(MinHeap H);
-HFMT Maxab(HFMT a, HFMT b);
-HFMT DeleteMinHeap(MinHeap H);
+HFMTNode Maxab(HFMTNode a, HFMTNode b);
+HFMTNode DeleteMinHeap(MinHeap H);
 MinHeap WriteToMinHeap(int Maxlayer, DATA a[], int lentha);//lentha为数组a[]的长度
 
 MinHeap MinHeap_New();
-MinHeap MinHeap_Insert(HFMT D, MinHeap MH);
-MinHeap MinHeap_WriteIn(HFMT* D);
-//HFMT MinHeap_Pop(MinHeap MH);
+MinHeap MinHeap_Insert(HFMTNode D, MinHeap MH);
+MinHeap MinHeap_WriteIn(HFMTNode* D);
+//HFMTNode MinHeap_Pop(MinHeap MH);
 
 //
-HFMT CreateHT(MinHeap MH);
-//HFMT 
-//HFMT HaffmanTree_Insert(HFMT HT, DATA D);
+HFMTNode CreateHT(MinHeap MH);
+//HFMTNode 
+//HFMTNode HaffmanTree_Insert(HFMTNode HT, DATA D);
 
 
 #endif // !_HEAH_H_

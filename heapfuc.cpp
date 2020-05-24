@@ -5,12 +5,11 @@ MinHeap CreateHeap(int Maxlayer)
 {
 	//创建容积为2^Maxlayer-1的最大堆(Maxlayer >= 1)
 	int Maxsize = (int)pow(2, Maxlayer);
-	MinHeap h = (MinHeap)malloc(sizeof(struct HNode));
-	h->Data = new HFMT[Maxsize]();
+	MinHeap h = new HNode();
+	h->Data = new HFMTNode[Maxsize]();
 	h->Capacity = Maxsize - 1;
 	h->Size = 0;
-	h->Data[0]->Data.Weight = 1;
-	//h->Data[0]->Data.Str = 500;//哨兵，意义？
+	h->Data[0].Data = {"Guard", 0};//哨兵，意义？
 
 	return h;
 }
@@ -32,7 +31,7 @@ MinHeap InsertMinHeap(MinHeap H, DATA D)//D为DATA*类型的数据
 		//权值不能小于等于0
 		//如果H为空，直接插入
 		if (IsEmptyHeap(H)) {
-			H->Data[1]->Data = D;
+			H->Data[1].Data = D;
 			H->Size++;
 		}
 		else if (IsFullHeap(H))
@@ -40,11 +39,11 @@ MinHeap InsertMinHeap(MinHeap H, DATA D)//D为DATA*类型的数据
 			std::cout << "The MaxHeap is full!" << std::endl;
 		}
 		else {
-			HFMT emp;
+			HFMTNode emp;
 			int i = H->Size + 1;
-			H->Data[i]->Data = D;
+			H->Data[i].Data = D;
 			H->Size++;
-			while (H->Data[i]->Data.Weight > H->Data[i / 2]->Data.Weight && i / 2 >= 1) {
+			while (H->Data[i].Data.Weight > H->Data[i / 2].Data.Weight && i / 2 >= 1) {
 				//若叶节点的值大于根节点，交换两值
 				emp = H->Data[i];
 				H->Data[i] = H->Data[i / 2];
@@ -61,32 +60,33 @@ MinHeap InsertMinHeap(MinHeap H, DATA D)//D为DATA*类型的数据
 void Pr_Heap(MinHeap H)
 {
 	for (int i = 1; i <= H->Size; i++) {
-		std::cout << H->Data[i]->Data.Str << "\t";
+		std::cout << H->Data[i].Data.Str << "\t";
 	}
 }
 
 
-HFMT Maxab(HFMT a, HFMT b)
+HFMTNode Maxab(HFMTNode a, HFMTNode b)
 {
-	return a->Data.Weight > b->Data.Weight ? a : b;
+	return a.Data.Weight > b.Data.Weight ? a : b;
 }
 
-HFMT DeleteMinHeap(MinHeap H)
+HFMTNode DeleteMinHeap(MinHeap H)
 {
-	HFMT cmp;
+	HFMTNode cmp;
 	int i = 1;
-	HFMT ret;
+	HFMTNode ret;
 
 	ret = H->Data[1];
 	H->Data[i] = H->Data[H->Size];
-	H->Data[H->Size] = 0;
+	H->Data[H->Size].Data = {"", 0};
 	H->Size--;
 
-	while (H->Data[i * 2] != 0)
+	while (H->Data[i * 2].Data != {"", 0})
 	{
 		//在i,i*2,i*2+1三个数的Data之间比较大小
 		cmp = Maxab(H->Data[i * 2], H->Data[i * 2 + 1]);
 		if (cmp == H->Data[i * 2]) {
+			
 			cmp = Maxab(cmp, H->Data[i]);
 			if (cmp != H->Data[i]) {
 				cmp = H->Data[i];
