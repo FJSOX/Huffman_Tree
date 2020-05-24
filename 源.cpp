@@ -24,8 +24,8 @@ int main()
 	
 	MinHeap h= WriteToMinHeap(2, a, 3);
 	Pr_Heap(h);
+	HFMTNode hh= CreateHT(h);
 
-	
 	
 	std::cout << "Program is over!";
 	system("pause");

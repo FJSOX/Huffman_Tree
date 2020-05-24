@@ -25,7 +25,7 @@ bool IsEmptyHeap(MinHeap H)
 }
 
 
-MinHeap InsertMinHeap(MinHeap H, DATA D)//D为DATA*类型的数据
+MinHeap InsertMinHeap(MinHeap H, DATA D)//D为DATA类型的数据
 {
 	if (D.Weight > 0) {
 		//权值不能小于等于0
@@ -36,15 +36,15 @@ MinHeap InsertMinHeap(MinHeap H, DATA D)//D为DATA*类型的数据
 		}
 		else if (IsFullHeap(H))
 		{
-			std::cout << "The MaxHeap is full!" << std::endl;
+			std::cout << "The MinHeap is full!" << std::endl;
 		}
 		else {
 			HFMTNode emp;
 			int i = H->Size + 1;
 			H->Data[i].Data = D;
 			H->Size++;
-			while (H->Data[i].Data.Weight > H->Data[i / 2].Data.Weight && i / 2 >= 1) {
-				//若叶节点的值大于根节点，交换两值
+			while (H->Data[i].Data.Weight < H->Data[i / 2].Data.Weight && i / 2 >= 1) {
+				//若叶节点的值小于根节点，交换两值
 				emp = H->Data[i];
 				H->Data[i] = H->Data[i / 2];
 				i = i / 2;
@@ -65,9 +65,9 @@ void Pr_Heap(MinHeap H)
 }
 
 
-HFMTNode Maxab(HFMTNode a, HFMTNode b)
+HFMTNode Minab(HFMTNode a, HFMTNode b)
 {
-	return a.Data.Weight > b.Data.Weight ? a : b;
+	return a.Data.Weight < b.Data.Weight ? a : b;
 }
 
 HFMTNode DeleteMinHeap(MinHeap H)
@@ -81,29 +81,34 @@ HFMTNode DeleteMinHeap(MinHeap H)
 	H->Data[H->Size].Data = {"", 0};
 	H->Size--;
 
-	while (H->Data[i * 2].Data.Str != ""&& H->Data[i * 2].Data.Weight!=0)
-	{
-		//在i,i*2,i*2+1三个数的Data之间比较大小
-		cmp = Maxab(H->Data[i * 2], H->Data[i * 2 + 1]);
-		if (H->Data[i * 2].Data.Str==cmp.Data.Str&& H->Data[i * 2].Data.Weight == cmp.Data.Weight) {
-			
-			cmp = Maxab(cmp, H->Data[i]);
-			if (H->Data[i].Data.Str == cmp.Data.Str&& H->Data[i].Data.Weight == cmp.Data.Weight) {
-				cmp = H->Data[i];
-				H->Data[i] = H->Data[i * 2];
-				H->Data[i * 2] = cmp;
-				i = i * 2;
+	if (H->Size>1) {
+		while (H->Data[i * 2].Data.Str != "" && H->Data[i * 2].Data.Weight != 0 && i / 2 >= 1)
+		{
+			//在i,i*2,i*2+1三个数的Data之间比较大小
+			cmp = Minab(H->Data[i * 2], H->Data[i * 2 + 1]);
+			if (H->Data[i * 2].Data.Str == cmp.Data.Str && H->Data[i * 2].Data.Weight == cmp.Data.Weight) {
+
+				cmp = Minab(cmp, H->Data[i]);
+				if (H->Data[i].Data.Str == cmp.Data.Str && H->Data[i].Data.Weight == cmp.Data.Weight) {
+					cmp = H->Data[i];
+					H->Data[i] = H->Data[i * 2];
+					H->Data[i * 2] = cmp;
+					i = i * 2;
+				}
+			}
+			else {
+				cmp = Minab(cmp, H->Data[i]);
+				if (H->Data[i].Data.Str == cmp.Data.Str && H->Data[i].Data.Weight == cmp.Data.Weight) {
+					cmp = H->Data[i];
+					H->Data[i] = H->Data[i * 2 + 1];
+					H->Data[i * 2 + 1] = cmp;
+					i = i * 2 + 1;
+				}
 			}
 		}
-		else {
-			cmp = Maxab(cmp, H->Data[i]);
-			if (H->Data[i].Data.Str == cmp.Data.Str && H->Data[i].Data.Weight == cmp.Data.Weight) {
-				cmp = H->Data[i];
-				H->Data[i] = H->Data[i * 2 + 1];
-				H->Data[i * 2 + 1] = cmp;
-				i = i * 2 + 1;
-			}
-		}
+
+	}
+	else {
 
 	}
 
