@@ -44,6 +44,15 @@ HFMTNode NewHFNode()
 
 HFMTNode ABC(HFMTNode A, HFMTNode B, HFMTNode C)
 {
+	C.Data = { "Node", A.Data.Weight + B.Data.Weight };
+	C.Left = new HFMTNode();
+	C.Right = new HFMTNode();
+	C.Left->Data = A.Data;
+	C.Left->Left = A.Left;
+	C.Left->Right = A.Right;
+	C.Right->Data = B.Data;
+	C.Right->Left = B.Left;
+	C.Right->Right = B.Right;
 
 	return C;
 }
@@ -55,13 +64,11 @@ HFMTNode CreateHT(MinHeap MH)
 	{
 		//每次运行都在同一位置新建a，b，因为引用是附地址的，所以导致循环出错-》解法：不附地址调用？尚未实施！
 		HFMTNode c = NewHFNode();
-		HFMT a = new HFMTNode();
-		HFMT b = new HFMTNode();
-		a=&DeleteMinHeap(MH);
-		b = &DeleteMinHeap(MH);
-		c.Data = { "Node", a->Data.Weight+b->Data.Weight };
-		c.Left = a;
-		c.Right = b;
+		HFMTNode a = NewHFNode();
+		HFMTNode b = NewHFNode();
+		a = DeleteMinHeap(MH);
+		b = DeleteMinHeap(MH);
+		c = ABC(a, b, c);
 		MH = Insert_HFMTNode_To_MinHeap(MH, c);
 	}
 
