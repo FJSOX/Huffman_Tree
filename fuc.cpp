@@ -47,6 +47,8 @@ HFMTNode ABC(HFMTNode A, HFMTNode B, HFMTNode C)
 	C.Data = { "Node", A.Data.Weight + B.Data.Weight };
 	C.Left = new HFMTNode();
 	C.Right = new HFMTNode();
+	//C.Left = A;
+	//C.Right = B;
 	C.Left->Data = A.Data;
 	C.Left->Left = A.Left;
 	C.Left->Right = A.Right;
@@ -69,8 +71,19 @@ HFMTNode CreateHT(MinHeap MH)
 		a = DeleteMinHeap(MH);
 		b = DeleteMinHeap(MH);
 		c = ABC(a, b, c);
+
+		
+
 		MH = Insert_HFMTNode_To_MinHeap(MH, c);
 	}
 
 	return MH->Data[1];
+}
+
+void Print_HT(HFMT HF)
+{
+	Array a;
+	a.A = new HFMT()[];
+	a.Front = 0;
+	a.Rear = 1;
 }

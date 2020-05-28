@@ -20,9 +20,9 @@
 
 int main()
 {
-	DATA a[] = { { "h", 5 }, { "e", 3 }, { "l", 4 } };
+	DATA a[] = { { "h", 5 }, { "e", 3 }, /*{ "l", 4 }*/ };
 	
-	MinHeap h= WriteToMinHeap(2, a, 3);
+	MinHeap h= WriteToMinHeap(2, a, sizeof(a)/sizeof(a[0]));
 	Pr_Heap(h);
 	HFMTNode hh= CreateHT(h);
 

@@ -42,9 +42,20 @@ HFMTNode NewHFNode();
 
 //
 MinHeap Insert_HFMTNode_To_MinHeap(MinHeap H, HFMTNode HF);
+HFMTNode NewHFNode();
+HFMTNode ABC(HFMTNode A, HFMTNode B, HFMTNode C);
 HFMTNode CreateHT(MinHeap MH);
 //HFMTNode 
 //HFMTNode HaffmanTree_Insert(HFMTNode HT, DATA D);
 
 
+//±éÀú´òÓ¡Ê÷
+struct Array
+{
+	HFMT* A;
+	int Front;
+	int Rear;
+};
+
+void Print_HT(HFMT HF);
 #endif // !_HEAH_H_
