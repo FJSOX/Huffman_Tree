@@ -80,10 +80,70 @@ HFMTNode CreateHT(MinHeap MH)
 	return MH->Data[1];
 }
 
+Array Insert_HF_To_Array(HFMT HF, Array Ar, int Ar_Size)
+{
+	if (Ar.Rear < Ar_Size) {
+		Ar.A[Ar.Rear] = HF;
+		Ar.Rear++;
+	}
+	else
+	{
+		std::cout << "Array is full!" << std::endl;
+	}
+
+	return Ar;
+}
+
+HFMT Delete_Fornt_Of_Array(Array &Ar)
+{
+	
+	HFMT h = new HFMTNode;
+
+	if (Ar.Rear > Ar.Front+1) 
+	{
+		
+		h = Ar.A[Ar.Front+1];
+		Ar.Front++;
+	}
+	else {
+		std::cout << "Array is empty!" << std::endl;
+	}
+
+	return h;
+}
+
 void Print_HT(HFMT HF)
 {
+	int asize = 20;
+
 	Array a;
-	a.A = new HFMT()[];
+	a.A = new HFMT[asize];
 	a.Front = 0;
 	a.Rear = 1;
+	//int i = 1;
+
+	std::cout << std::endl;
+	
+	if (HF!=NULL)
+	{
+		a.A[a.Rear] = HF;
+		a.Rear++;
+
+		while (a.Rear>a.Front+1)
+		{
+			HFMT h = Delete_Fornt_Of_Array(a);
+			std::cout << h->Data.Str << " - " << h->Data.Weight << std::endl;
+			if (h->Left != NULL) {
+				a = Insert_HF_To_Array(h->Left, a, asize);
+			}
+			if (h->Right != NULL) {
+				a = Insert_HF_To_Array(h->Right, a, asize);
+			}
+		}
+	}
+	else
+	{
+		std::cout << "Error!" << std::endl;
+	}
+	delete a.A;
 }

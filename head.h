@@ -58,4 +58,7 @@ struct Array
 };
 
 void Print_HT(HFMT HF);
+HFMT Delete_Fornt_Of_Array(Array& Ar);
+Array Insert_HF_To_Array(HFMT HF, Array Ar, int Ar_Size);
+
 #endif // !_HEAH_H_

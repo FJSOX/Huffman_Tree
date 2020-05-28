@@ -82,34 +82,53 @@ HFMTNode DeleteMinHeap(MinHeap H)
 	H->Size--;
 
 	if (H->Size>1) {
-		while (H->Data[i * 2].Data.Str != "" && H->Data[i * 2].Data.Weight != 0 && i / 2 >= 1)
+		while (H->Data[i * 2].Data.Str != "" && H->Data[i * 2].Data.Weight != 0  && i<H->Size)
 		{
 			//在i,i*2,i*2+1三个数的Data之间比较大小
 			cmp = Minab(H->Data[i * 2], H->Data[i * 2 + 1]);
 			if (H->Data[i * 2].Data.Str == cmp.Data.Str && H->Data[i * 2].Data.Weight == cmp.Data.Weight) {
 
 				cmp = Minab(cmp, H->Data[i]);
-				if (H->Data[i].Data.Str == cmp.Data.Str && H->Data[i].Data.Weight == cmp.Data.Weight) {
+				if (i * 2 > H->Size)
+				{
+					break;
+				}
+				else if ( H->Data[i].Data.Str != cmp.Data.Str || H->Data[i].Data.Weight != cmp.Data.Weight ) {
 					cmp = H->Data[i];
 					H->Data[i] = H->Data[i * 2];
 					H->Data[i * 2] = cmp;
 					i = i * 2;
 				}
+				else {
+					break;
+				}
+				
 			}
 			else {
 				cmp = Minab(cmp, H->Data[i]);
-				if (H->Data[i].Data.Str == cmp.Data.Str && H->Data[i].Data.Weight == cmp.Data.Weight) {
+				if (i * 2 + 1 > H->Size)
+				{
+					break;
+				}
+				else if ( H->Data[i].Data.Str != cmp.Data.Str || H->Data[i].Data.Weight != cmp.Data.Weight ) {
 					cmp = H->Data[i];
 					H->Data[i] = H->Data[i * 2 + 1];
 					H->Data[i * 2 + 1] = cmp;
 					i = i * 2 + 1;
+				} 
+				else {
+					break;
 				}
 			}
 		}
-
 	}
-	else {
-
+	if (H->Size==2)
+	{
+		if (H->Data[1].Data.Weight > H->Data[2].Data.Weight) {
+			cmp = H->Data[1];
+			H->Data[1] = H->Data[2];
+			H->Data[2] = cmp;
+		}
 	}
 
 	return ret;
